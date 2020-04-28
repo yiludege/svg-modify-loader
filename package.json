@@ -1,7 +1,7 @@
 {
   "name": "svg-modify-loader",
-  "version": "1.0.0",
-  "description": "svg attr operate loader",
+  "version": "1.0.1",
+  "description": "svg modify loader",
   "main": "index.js",
   "scripts": {
     "build": "webpack --config example/webpack.config.js",
