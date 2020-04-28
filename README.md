@@ -21,11 +21,17 @@ module: {
           loader: "../index.js",
           options: {
             // use function to process json ast
-            // example here is delete all class attribute
-            handler: function (node) {
-              if (node.attributes.class) {
-                delete node.attributes.class;
+            handler: function (node, playload) {
+              let attr = node.attributes;
+              // delete all class attribute
+              if (attr.class) {
+                delete attr.class;
               }
+              // add fill none for all node which have no fill
+              if (!attr.fill && !playload.fill && node.name !== 'svg') {
+                attr.fill = "none";
+              }
+              return playload.fill ? playload : attr.fill ? { fill: attr.fill } : {};
             },
           },
         },
@@ -34,3 +40,11 @@ module: {
   ],
 }
 ```
+
+## options
+
+### handler(node, playload)
+
+- handler is a function
+- parameter node is currently svg node
+- parameter playload is context which from parent node handler return, if no return, the value will inherit the chained node which handler have return until {}

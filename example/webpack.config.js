@@ -1,4 +1,5 @@
 module.exports = {
+  mode: "production",
   context: __dirname,
   entry: "./main",
   output: {
@@ -14,10 +15,18 @@ module.exports = {
           {
             loader: "../index.js",
             options: {
-              handler: function (node) {
-                if (node.attributes.class) {
-                  delete node.attributes.class;
+              // use function to process json ast
+              handler: function (node, playload) {
+                let attr = node.attributes;
+                // delete all class attribute
+                if (attr.class) {
+                  delete attr.class;
                 }
+                // add fill none for all node which have no fill
+                if (!attr.fill && !playload.fill && node.name !== 'svg') {
+                  attr.fill = "none";
+                }
+                return playload.fill ? playload : attr.fill ? { fill: attr.fill } : {};
               },
             },
           },

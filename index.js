@@ -12,10 +12,10 @@ module.exports = function (source) {
   const handler = config.handler;
 
   try {
-    const recursive = function (json) {
-      handler(json);
+    const recursive = function (json, playload={}) {
+    let newPlayload = handler(json, playload) || playload;
       if (json.children.length) {
-        json.children.forEach((sub) => recursive(sub));
+        json.children.forEach((sub) => recursive(sub, newPlayload));
       }
     };
     if (typeof handler === "function") {
