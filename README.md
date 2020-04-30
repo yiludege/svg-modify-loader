@@ -41,10 +41,8 @@ module: {
 }
 ```
 
-## options
-
 ### handler(node, playload)
 
 - handler is a function
 - parameter node is currently svg node
-- parameter playload is context which from parent node handler return, if no return, the value will inherit the chained node which handler have return until {}
+- parameter playload is context returned by parent node handler return, if no return, the value will inherit the chained node handler return until {}
