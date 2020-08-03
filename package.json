@@ -1,6 +1,6 @@
 {
   "name": "svg-modify-loader",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "svg modify loader",
   "main": "index.js",
   "homepage": "https://github.com/yiludege/svg-modify-loader",
